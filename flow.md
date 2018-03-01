@@ -7,7 +7,7 @@ application
 - To agree on the flow for creating a user before implementation
 - To determine the best user experience for the user as this could be their first impression of 
 the application and organization
-
+oc
 
 ## User Flow
 At the time of authoring, there are three routes to create a user presence on the 
@@ -30,5 +30,5 @@ From this point, the flow will be similar to the [Second Route](#route-two-anony
 #### Route Two: Anonymously visiting my.scouting.org
 A user can visit the legacy version of [my.scouting.org](https://my.scouting.org) and create a 
 presence in the my.scouting databases without any interaction from the Boy Scouts of America or it's affiliates.
-With the updated version of **my.scouting.org**, a user will also have the ability to create an 
+With the latest iteration of **my.scouting.org**, a user will also have the ability to create an 
 account without interaction from BSA, and without a unit/organization specifically chosen.
