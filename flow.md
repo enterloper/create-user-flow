@@ -19,7 +19,7 @@ properly modified it's settings, an `Apply Now` button will appear on it's flag 
 by Google maps. If a link is clicked to _Apply_, the user will be sent to `my.scouting.org` that 
 will have a modified URL with a `Record Locator` as query: `https://my.scouting.org/VES/OnlineReg/1.0.0/?tu=UF-MB-571paa2015`. 
 The Record Locator is used to connect the account to be created with the specified unit selected from the map (example shown below).
-From this point, the flow will transition to the [Second Route](#route-two:anonymously-visiting-my.scouting.org);
+From this point, the flow will transition to the [Second Route](#route-two-anonymously-visiting-myscoutingorg);
 </br>
 </br>
 
