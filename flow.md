@@ -17,7 +17,9 @@ A user can visit the [BeAScout](https://beascout.scouting.org/BeAScoutMap.aspx) 
 a unit within their area (example shown below), if a unit is accepting applications and has 
 properly modified it's settings, an `Apply Now` button will appear on it's flag on the maps provided 
 by Google maps. If a link is clicked to _Apply_, the user will be sent to `my.scouting.org` that 
-will have a modified URL with a `Record Locator` as query: `https://my.scouting.org/VES/OnlineReg/1.0.0/?tu=UF-MB-571paa2015`. 
+will have a modified URL with a `Record Locator` as query: `https://my.scouting.org/VES/OnlineReg/1.0.0/?tu=UF-MB-571paa2015`.
+
+The `Record Locator` being `UF-MB-571paa2015`. 
 The Record Locator is used to connect the account to be created with the specified unit selected from the map (example shown below).
 From this point, the flow will be similar to the [Second Route](#route-two-anonymously-visiting-myscoutingorg);
 </br>
@@ -32,3 +34,31 @@ A user can visit the legacy version of [my.scouting.org](https://my.scouting.org
 presence in the my.scouting databases without any interaction from the Boy Scouts of America or it's affiliates.
 With the latest iteration of **my.scouting.org**, a user will also have the ability to create an 
 account without interaction from BSA, and without a unit/organization specifically chosen.
+![my.scouting.org login view](./assets/MYST_landing.png "my.scouting.org 
+landing preview")
+<h1>THIS IS A TEST</h1>
+Upon clicking on the `Create Account` button, a user will be directed to the Account Creation 
+page in `my.scouting.org`. 
+##### Two possibilities:
+- If the user is arriving to this page without an invitation (discussed 
+in [Route Three](#route-three-visiting-myscoutingorg-via-invitation);) or without going through 
+`beascout.scouting.org`, then the full URL will be `my.scouting.org/online-registration/create-account/new`.
+- If the user is arriving to this page via an invitation (discussed 
+in [Route Three](#route-three-visiting-myscoutingorg-via-invitation)) or by going through 
+`beascout.scouting.org`, then the full URL will be `my.scouting.org/online-registration/create-account/{RecordIdentifier}`
+`Record Identifier` in the URL would be a unique identifier that will be used to link the 
+to-be-made-account with the unit that provided the information
+![my.scouting.org create account view](./assets/MYST_create_account.png "my.scouting.org 
+create account preview")
+
+#### Route Three: Visiting my.scouting.org via Invitation
+
+
+
+
+
+
+
+
+
+
