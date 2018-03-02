@@ -39,7 +39,7 @@ selected from the map (example shown below). From this point, the flow will be s
 
 ####  Route Two: Visiting my.scouting.org
 
-A user can visit the legacy version of [my.scouting.org](https://my.scouting.org">my.scouting.org)
+A user can visit the legacy version of [my.scouting.org](https://my.scouting.org)
 and create a presence in the my.scouting databases without any interaction from the Boy Scouts of
 America or it's affiliates. With the latest iteration of **my.scouting.org**, a user will also 
 have the ability to create an account without interaction from BSA, and without a 
