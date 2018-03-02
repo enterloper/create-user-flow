@@ -36,7 +36,7 @@
     The <strong>Record Identifier</strong> being <code>UF-MB-571paa2015</code>. 
     The Record Identifier is used to connect the account to be created with the specified unit 
     selected from the map (example shown below). From this point, the flow will be similar to the
-    <a href='#route-two-anonymously-visiting-myscoutingorg'>Second Route</a>
+    [Second Route]('#route-two-anonymously-visiting-myscoutingorg')
 </p>
 
 </br>
@@ -157,11 +157,12 @@ create account preview")
                 fire on the blurring (action of losing focus on the field by the user) of the 
                 <strong>Date of Birth</strong> field.
             </p>
-            <p>
-                If the API responds with a match, a modal will open stating the presence of the 
-                user's online account. In addition, a message should be provided informing the 
-                user of Member Care Services and the respective contact details. with a 
-                button that when clicked will send the user to the <a href="##route-two-anonymously-visiting-myscoutingorg">Log In Page</a> 
+    
+If the API responds with a match, a modal will open stating the presence of the 
+user's online account. In addition, a message should be provided informing the 
+user of Member Care Services and the respective contact details. with a 
+button that when clicked will send the user to the 
+[Log In Page]("#route-two-anonymously-visiting-myscoutingorg") 
                 
         </li>
         <li>
