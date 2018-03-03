@@ -1,11 +1,13 @@
 # User Creation Flow
 
-### Objectives
+## Objectives
 
-To determine the flow for creating a user through the medium of my.scouting
-To determine the APIs needed to address the concerns raised from the legacy my.scouting application 
-To agree on the flow for creating a user before implementation
-To determine the best user experience for the user as this could be their first impression of the application and organization 
+- To determine the flow for creating a user through the medium of my.scouting
+- To determine the APIs needed to address the concerns raised from the legacy my.scouting 
+application 
+- To agree on the flow for creating a user before implementation
+- To determine the best user experience for the user as this could be their first impression of 
+the application and organization 
 
 
 ## User Flow
@@ -13,7 +15,7 @@ To determine the best user experience for the user as this could be their first 
 At the time of authoring, there are three routes to create a user presence on the 
 respective databases associated with `my.scouting`.
 
-#### Route One: Navigating through `beascout.scouting.org`
+### Route One: Navigating through `beascout.scouting.org`
 
 A user can visit the [BeaScout](https://beascout.scouting.org/BeAScoutMap.aspx) site and choose
 a unit within their area (example shown below), if a unit is accepting applications and has 
@@ -27,7 +29,7 @@ Identifier** as query:
 The **Record Identifier** being `UF-MB-571paa2015`. 
 The Record Identifier is used to connect the account to be created with the specified unit 
 selected from the map (example shown below). From this point, the flow will be similar to the
-[Second Route](#route-two-anonymously-visiting-myscoutingorg)
+[Second Route](#route-two-visiting-myscoutingorg)
 
 </br>
 </br>
@@ -37,7 +39,7 @@ selected from the map (example shown below). From this point, the flow will be s
 </br>
 </br>
 
-####  Route Two: Visiting my.scouting.org
+###  Route Two: Visiting my.scouting.org
 
 A user can visit the legacy version of [my.scouting.org](https://my.scouting.org)
 and create a presence in the my.scouting databases without any interaction from the Boy Scouts of
@@ -52,9 +54,9 @@ Upon clicking on the **Create Account** button, a user will be directed to the
 **Account Creation** page in **my.scouting.org** shown below.
 
 
-#### Two possibilities:
+### Two possibilities:
 
-##### Does not have a Record Identifier
+#### Does not have a Record Identifier
 
 If the user is arriving to this page <em>without</em> an invitation or 
 without going through `beascout.scouting.org`, then the full URL will be: 
@@ -62,10 +64,11 @@ without going through `beascout.scouting.org`, then the full URL will be:
 
 
 
-##### Has a Record Identifier
+#### Has a Record Identifier
 
 If the user is arriving to this page via an invitation (discussed in 
-[Route Three](#route-three-visiting-myscoutingorg-via-invitation) or by going through 
+[Route Three](#route-three-visiting-myscoutingorg-via-invitation-or-qr-or-email) or by going 
+through 
 **beascout.scouting.org**, then the full URL will be:
 
 `my.scouting.org/online-registration/create-account/{RecordIdentifier}`
@@ -78,10 +81,10 @@ respective unit/organization.
 ![my.scouting.org create account view](./assets/MYST_create_account.png "my.scouting.org 
 create account preview")
 
-#### Route Three: Visiting my.scouting.org via Invitation/QR code/email
+### Route Three: Visiting my.scouting.org via Invitation or QR or email
 
 
-If the user is provided with a URL via an invitation/QR code/email, they will be directed to the
+If the user is provided with a URL via an invitation, QR code, email, they will be directed to the
 above page with a route similar to: 
 <br />
 `my.scouting.org/online-registration/create-account/{RecordIdentifier}`
@@ -102,7 +105,7 @@ The general actions and responses should be taken as the user fills out the **YO
 INFORMATION** form for each field:
     
         
-#### Member ID and Date of Birth fields
+### Member ID and Date of Birth fields
 
 If a user has a **Member ID** but is lacking an account, they can enter 
 their **Member ID**. Entering a person's **Member ID** will
@@ -133,17 +136,30 @@ fire on the blurring (action of losing focus on the field by the user) of the
     
 If the API responds with a match, a modal will open stating the presence of the 
 user's online account. In addition, a message should be provided informing the 
-user of Member Care Services and the respective contact details. with a 
+user of Member Care Services and the respective contact details. With an acknowledgement 
 button that when clicked will send the user to the 
-[Log In Page](#route-two-anonymously-visiting-myscoutingorg) 
+[Log In Page](#route-two-visiting-myscoutingorg) 
                 
-#### First Name, Last Name, ZIP CODE
+### First Name, Last Name, ZIP Code
+**MFSR-122**
+If the user's Member ID and Date of Birth values return no results, validation for the **First 
+Name**, **Last Name**, and **ZIP Code** will be handled client-side on blur (loss of element 
+focus). When the user click's next, validation will again check to ensure there are no errors 
+present in the form for the fields **Date of Birth**, **First Name**, **Last Name**, and **ZIP 
+Code**. **Member ID** will not be used or validated from this point because it is assumed that the 
+value is irrelevant to the system. If validation is cleared, an API will be fired to search for 
+potential matches in the BSA database.
+ 
+### Two Possibilities:
 
+1. If one or more entries are found as a match, the user will be prompted to contact Member
+Care Services and then be sent to the **Log In Page** after pressing an acknowledgement button.
 
+1. If no matches are found, the second portion of the create account form will appear, as shown 
+below.
 
-
-
-
+![my.scouting.org create account view](./assets/MYST_create_account_2nd_half.png "my.scouting.org 
+create account preview")
 
 
 
