@@ -10,7 +10,7 @@ application
 the application and organization 
 
 
-## User Flow
+## Your Information
 
 At the time of authoring, there are three routes to create a user presence on the 
 respective databases associated with `my.scouting`.
@@ -54,21 +54,21 @@ Upon clicking on the **Create Account** button, a user will be directed to the
 **Account Creation** page in **my.scouting.org** shown below.
 
 
-### Two possibilities:
+#### Two possibilities:
 
-#### Does not have a Record Identifier
+1. ##### Does not have a Record Identifier
 
-If the user is arriving to this page <em>without</em> an invitation or 
-without going through `beascout.scouting.org`, then the full URL will be: 
-`my.scouting.org/online-registration/create-account/new`.
+    If the user is arriving to this page <em>without</em> an invitation or 
+    without going through `beascout.scouting.org`, then the full URL will be: 
+    `my.scouting.org/online-registration/create-account/new`.
 
 
 
-#### Has a Record Identifier
+2. ##### Has a Record Identifier
 
-If the user is arriving to this page via an invitation (discussed in 
-[Route Three](#route-three-visiting-myscoutingorg-via-invitation-or-qr-or-email) or by going 
-through 
+    If the user is arriving to this page via an invitation (discussed in 
+    [Route Three](#route-three-visiting-myscoutingorg-via-invitation-or-qr-or-email) or by going 
+    through 
 **beascout.scouting.org**, then the full URL will be:
 
 `my.scouting.org/online-registration/create-account/{RecordIdentifier}`
@@ -150,10 +150,11 @@ Code**. **Member ID** will not be used or validated from this point because it i
 value is irrelevant to the system. If validation is cleared, an API will be fired to search for 
 potential matches in the BSA database.
  
-### Two Possibilities:
+#### Two Possibilities:
 
-1. If one or more entries are found as a match, the user will be prompted to contact Member
-Care Services and then be sent to the **Log In Page** after pressing an acknowledgement button.
+1. If one or more entries are found as a match, the user will be prompted to select the 
+matching account and then go through the process of Retrieving their respective Username. If the 
+username can not be retrieved, the user will be advised to contact Member Care Services.
 
 1. If no matches are found, the second portion of the create account form will appear, as shown 
 below.
@@ -161,5 +162,110 @@ below.
 ![my.scouting.org create account view](./assets/MYST_create_account_2nd_half.png "my.scouting.org 
 create account preview")
 
+## Your Account Information
 
+The following fields are used for the second portion of the form:
+1. Email Address: The input of this field will be validated client side (in the UI) as well as 
+server side (via the API), this value will be used to send instructions, confirmations, and be 
+used for credential recovery. 
 
+1. Username: The input of this field will be validated client side as well as via API. The 
+following parameters must be followed for Username: 
+    - Must be 6 to 20 characters
+    - Must be alphanumeric
+    - The period (.) and underscore (_) characters are allowed but can not be the last character 
+    in a username
+    - No other special characters are allowed
+    - Spaces are **not** permitted (the UI will enforce this in the form, as well as in the 
+    method that consumes the API by trimming/stripping whitespace)
+    
+    The Username needs to be unique. In order to insure uniqueness, an API must be consumed by 
+    the UI to make the appropriate check. When the user leaves the field (on blur), the UI will 
+    check to ensure the user followed the above rules. If all of the rules are not followed, the API
+    will never be consumed. If the rules are followed and validation passes, the API wil be sent the 
+    username to check for uniqueness.  In the event of finding the username is already taken by
+    another account, The API should return possible suggestions for the username.
+
+1. Password: The input of this field will be validated client side, and later when the form is 
+submitted through the API. The following parameters must be followed for a Password:
+    - Must be at least 8 characters but no longer than 12 characters
+    - Must meet at least three of the following four criteria:
+        - Must contain at least one uppercase letter (A-Z)
+        - Must contain at least one lowercase letter (a-z)
+        - Must contain at least one numeric character (0-9)
+        - Must contain at least one non alphanumeric character (~!@#$%^&*(){}[]<>;:,.?/)
+
+1. Confirm Password: The input of this field will be validated client side. The API does not need
+ to check this field as the UI is simply checking for sameness.
+ 
+1. Security Question 1: This field is a drop down/select box with choices populated from the 
+backend/server. 
+A selection is mandatory.
+
+1. Answer Question 1: This field is an input field that will be the answer to the question 
+chosen by the user from the drop down/select box from the previous field.
+
+1. Security Question 2: This field is a drop down/select box with choices populated from an API. 
+A selection is mandatory. The question selected from the group of questions delivered from the 
+backend/server on Security Question 1 will be removed from the drop down/select options to 
+eliminate redundancy. This is currently done client-side. 
+
+1. Answer Question 2: This field is an input field that will be the answer to the question 
+chosen by the user from the drop down/select box from the previous field.
+
+1. Lastly, there will be a reCAPTCHA that will be used to minimize any potential automation from 
+bots. At the time of authoring, it is unclear if the reCAPTCHA will be used in API validation as 
+well.
+
+Once the form is filled out and the user clicks the **NEXT** button, a final validation will 
+check the fields on the UI end prior to consuming the "account creation" API. The "account 
+creation" API will also do a check to ensure that those consuming the API are also following the 
+same guidelines. The payload sent to the API will have the following **JSON** shape:
+```
+    DateOfBirth type = string, 
+    FirstName type = string,    
+    LastName type = string,
+    ZipCode type = string,
+    EmailAddress type = string,
+    Password type = string,
+    SecurityQuestion1 type = string,
+    SecurityAnswer1 type = string,
+    SecurityQuestion2 type = string,
+    SecurityAnswer2 type = string
+```
+### With values in a JSON object for clarity.
+```
+{
+    "DateOfBirth": "01/01/2001", 
+    "FirstName": "Alexample",    
+    "LastName": "McZample",
+    "ZipCode": "75062",
+    "EmailAddress": "example@gmail.com",
+    "Password": "abracadabra",
+    "SecurityQuestion1": "What was the name of your first pet?",
+    "SecurityAnswer1": "Doggo",
+    "SecurityQuestion2": "What was the color and Make of your first car?",
+    "SecurityAnswer2": "Brown Chevy"
+}
+```
+If the API returns a ResponseCode of '1', the user will then be taken to the login page for an 
+initial login. If the API returns errors, the UI will proivde the appropriate instructions via a 
+modal.
+
+## Developer Questions
+1. Do we need to send the successfully validated recaptcha value to the API as well?
+
+1. Should we be saving invitation values on a user's created account instance? In other words, 
+when a user is invited to scouting, should we be saving the value of that invitationGUID off the URL
+to use as a reference later? I think it would be a good idea.
+
+1. If a user does not have an invitationGUID what would that value be (`null`, `undefined`, `'new'`),
+ and how are we going to discover where to place that user? The current mockups of the APIs to be
+  consumed does not have a "Record Locator" with which the UI team can access or send that user to a
+  specific instance of an application directed at a specific group. Basically, we need some way 
+  to map a user to an application instance based on an invitation
+
+1. What are we doing with user accounts that are created solely for Youth Protection Training. Is
+ this information used at all beyond user access to YPT, and if so, how could we utilize this 
+ information for profit for BSA within the scale of the app/website? To my understanding, that data 
+ is dead once YPT is completed but still housed in our databases as bloat.
