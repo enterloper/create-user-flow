@@ -13,7 +13,10 @@ the application and organization
 ## Your Information
 
 At the time of authoring, there are three routes to create a user presence on the 
-respective databases associated with `my.scouting`.
+respective databases associated with `my.scouting`. 
+1. Navigating to the Create Account Page through **BeAScout**
+2. Navigating to the Create Account Page by visiting **my.scouting.org**
+3. Navigating to the Create Account Page via an invitation from a particular unit.
 
 ### Route One: Navigating through `beascout.scouting.org`
 
@@ -68,8 +71,7 @@ Upon clicking on the **Create Account** button, a user will be directed to the
 
     If the user is arriving to this page via an invitation (discussed in 
     [Route Three](#route-three-visiting-myscoutingorg-via-invitation-or-qr-or-email) or by going 
-    through 
-**beascout.scouting.org**, then the full URL will be:
+    through **beascout.scouting.org** or an invitation, then the full URL will be:
 
 `my.scouting.org/online-registration/create-account/{RecordIdentifier}`
 
